@@ -127,25 +127,29 @@ bool LinkedList<T>::isEmpty()
 template <class T>
 bool LinkedList<T>::deleteData(T value)
 {
-    if (!isEmpty()) // List isnt empty
+    if (length == 0) return false;
+    if (isEmpty() != 1) // List isnt empty
     {
         Node<T> *p = head;                   // make a pointer for the head
         Node<T> *prev = nullptr;             // make a pointer that points to the previous element
-        while ( p != nullptr && p -> data != value) // find value, else
+        while ( p != nullptr && p->data != value) // find value, else
         {
             prev = p;
-            p = p -> next;
+            p = p->next;
         }
         if (p == nullptr) return false;
-        if (p != nullptr && p == head) 
-        {
+        if (p == head) {                    // 
             head = p->next;
-            if (head == nullptr) 
-                {
-                    tail = nullptr;
-                }
-        };
-    } else { return false; }
+        } else if (p->next == nullptr) {
+            prev->next = nullptr;
+            tail = prev;
+        } else {
+            prev->next = p->next;
+        }
+        delete p;
+        length--;
+        return true;
+    } else return false;
 }
 
 #endif // _LINKEDLIST_H

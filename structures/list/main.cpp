@@ -28,11 +28,43 @@ int main(int argc, char *argv[])
         myList.addFirst(1);
         myList.addFirst(2);
         myList.addFirst(3);
+        myList.addLast(5);
         myList.print();
     }
     catch (const std::exception &e)
     {
-        std::cerr << e.what() << '\n';
+        cerr << e.what() << '\n';
+    }
+    catch (...)
+    {
+        cerr << "Undefined error while initialising" << endl;
+        abort();
+    }
+
+    try
+    {
+        LinkedList<int> otherList;
+        otherList.addLast(1);
+        otherList.addLast(2);
+        otherList.addLast(5);
+        otherList.addFirst(0);
+        otherList.addLast(5);
+        otherList.print();
+
+        try
+        {
+            otherList.deleteData(5);
+            otherList.print();
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+        
+    }
+    catch (const std::exception &e)
+    {
+        cerr << e.what() << '\n';
     }
     catch (...)
     {
