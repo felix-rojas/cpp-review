@@ -19,23 +19,31 @@ class LinkedList
         int getLength();
         void addFirst(T value);
         void addLast(T value);
-        void printList();
+        void print();
         void printLastNode();
         bool isEmpty();
         bool deleteData(T value);
-        bool deleteAt(int pos);
-        T getData(int pos);
-        void updateData(T value, T new_value);
-        void updateAt(T value, T new_value);
-        int findData(T value);
-        void operator =(const LinkedList<T> &other);
+        // bool deleteAt(int pos);
+        // T getData(int pos);
+        // void updateData(T value, T new_value);
+        // void updateAt(T value, T new_value);
+        // int findData(T value);
+        // void operator =(const LinkedList<T> &other);
 };
 
 // Definitions
 
+// Constructor
+template <class T>
+LinkedList<T>::LinkedList() {
+    head = nullptr;
+    tail = nullptr;
+    length = 0;
+}
+
 // O(n) where n is the size of the LinkedList
 template <class T>
-void LinkedList<T>::~LinkedList()
+LinkedList<T>::~LinkedList()
 {
     Node<T> *p, *q;       // create nodes to explore list
     p = head;             // begin at the head
@@ -65,7 +73,7 @@ void LinkedList<T>::addFirst(T value)
     Node<T>* newNode = new Node<T>(value); // create new node with value
     newNode -> next = head;                // point to head
     head = newNode;                        // set head to the New node
-    if (length == 0) { tail = newNode };   // if length is zero, tail is the new node 
+    if (length == 0) { tail = newNode; }   // if length is zero, tail is the new node 
     length++;                              // increade length of LinkedList
 }
 
@@ -87,12 +95,15 @@ void LinkedList<T>::addLast(T value)
 // prints the entire LinkedList
 // O(n)
 template <class T>
-void LinkedList<T>::printList()
+void LinkedList<T>::print()
 {
     Node<T> *ptr = head;                 // create a pointer that is equal to head
-    while ( ptr != nullptr)              // when the pointer is null, we reached the end
+    while (ptr != nullptr)              // when the pointer is null, we reached the end
     { 
-        std::cout << ptr -> data << " "; // print the data where the pointer is currently at
+        std::cout << ptr -> data; // print the data where the pointer is currently at
+        if (ptr->next != nullptr){
+            std::cout << " -> ";
+        }
         ptr = ptr -> next;               // assign the temporal pointer the data and values whetre the next pointer is at
     }
     std::cout << std::endl;              // print newline
