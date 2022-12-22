@@ -26,7 +26,7 @@ public:
     bool deleteData(T value);
     bool deleteAt(int pos);
     void getData(int pos);
-    // void updateData(T value, T new_value);
+    bool updateData(T value, T new_value);
     // void updateAt(T value, T new_value);
     // int findData(T value);
     // void operator =(const LinkedList<T> &other);
@@ -152,8 +152,8 @@ bool LinkedList<T>::isEmpty()
 
 /** Deletes the first value it finds
  * @param value where value is the data in the Node class
- * @returns bool(true) when value isnt found 
- * @returns bool(false)
+ * @returns bool(true) when value is found 
+ * @returns bool(false) when value isnt found
 */
 template <class T>
 bool LinkedList<T>::deleteData(T value)
@@ -238,6 +238,11 @@ bool LinkedList<T>::deleteAt(int position)
         return false;
 }
 
+/** Prints data of the selected node
+ * @param position where the node to be erased is at
+ * @returns void
+*/
+
 template <class T>
 void LinkedList<T>::getData(int pos)
 {
@@ -264,5 +269,32 @@ void LinkedList<T>::getData(int pos)
     }
 }
 
+/** Updates data value at the first node 
+ * that has the same value as the searched one
+ * @param value value to look for
+ * @param new_value new value of the first found value
+ * @returns void
+*/
+
+template <class T>
+bool LinkedList<T>::updateData(T value, T new_value)
+{
+    if (isEmpty() != 1) // List isnt empty
+    {
+        Node<T> *p = head;                       // make a pointer for the head
+        
+        while (p != nullptr && p->data != value) // find value, else
+        {
+            p = p->next;
+        }
+
+        if (p == nullptr) return false;
+
+        p->data = new_value;
+        return true;
+    }
+
+    else return false;
+}
 
 #endif // _LINKEDLIST_H

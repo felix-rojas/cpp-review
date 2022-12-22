@@ -56,6 +56,8 @@ int main(int argc, char *argv[])
             otherList.deleteData(5);
             otherList.print();
             otherList.getData(4);
+	    otherList.updateData(5, 17);
+	   otherList.print();
         }
         catch(const std::exception& e)
         {
